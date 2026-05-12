@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>เทียบราคา</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#4F46E5">
+</head>
+<body>
+    <div class="app-container">
+        <!-- แถบหัวแอป พร้อมป้ายเวอร์ชัน -->
+        <header>
+            <h1>⚖️ เทียบความคุ้มค่า <span class="app-version">v1.1</span></h1>
+        </header>
+
+        <!-- พื้นที่แสดงการ์ดสินค้า -->
+        <main id="cards-container">
+            <!-- JavaScript จะสร้างการ์ดมาใส่ตรงนี้ -->
+        </main>
+
+        <!-- ปุ่มเพิ่มสินค้า -->
+        <div class="add-btn-wrapper">
+            <button class="btn-add" onclick="addItem()">+ เพิ่มสินค้าเปรียบเทียบ</button>
+        </div>
+
+        <!-- แถบด้านล่างติดหน้าจอ (Sticky Footer) -->
+        <footer class="sticky-footer">
+            <div id="verdict" class="verdict-box">พิมพ์ราคาและปริมาณเพื่อเริ่มคำนวณ</div>
+            <button class="btn-clear" onclick="clearAll()">เริ่มใหม่ทั้งหมด</button>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

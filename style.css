@@ -1,0 +1,190 @@
+:root {
+    --primary: #4F46E5;
+    --bg-color: #F3F4F6;
+    --card-bg: #FFFFFF;
+    --text-main: #1F2937;
+    --success: #10B981;
+    --danger: #EF4444;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+body { 
+    background-color: var(--bg-color); 
+    color: var(--text-main); 
+    -webkit-tap-highlight-color: transparent; 
+}
+
+.app-container { 
+    max-width: 480px; 
+    margin: 0 auto; 
+    min-height: 100vh; 
+    display: flex; 
+    flex-direction: column; 
+    padding-bottom: 130px; 
+}
+
+header { 
+    background: var(--primary); 
+    color: white; 
+    padding: 16px; 
+    text-align: center; 
+    position: sticky; 
+    top: 0; 
+    z-index: 10; 
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+header h1 { font-size: 20px; }
+
+/* ป้ายบอกเวอร์ชันแอป */
+.app-version {
+    font-size: 12px;
+    font-weight: normal;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 2px 8px;
+    border-radius: 12px;
+    vertical-align: middle;
+    margin-left: 8px;
+    display: inline-block;
+}
+
+main { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+.card { 
+    background: var(--card-bg); 
+    border-radius: 12px; 
+    padding: 16px; 
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); 
+    border: 2px solid transparent;
+    transition: 0.2s ease;
+}
+
+.card.winner { border-color: var(--success); background-color: #ECFDF5; }
+
+.card-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 12px; 
+    font-weight: bold; 
+    color: var(--primary); 
+}
+
+.btn-del { 
+    background: #FEE2E2; 
+    color: var(--danger); 
+    border: none; 
+    border-radius: 50%; 
+    width: 28px; 
+    height: 28px; 
+    font-size: 14px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+}
+
+.input-row { 
+    display: flex; 
+    flex-direction: column;
+    gap: 12px; 
+}
+
+.qty-wrapper {
+    display: flex;
+    gap: 8px;
+}
+.qty-wrapper input {
+    flex: 1; 
+    width: 100%;
+    padding: 10px; 
+    border: 1px solid #D1D5DB; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    outline: none; 
+}
+.qty-wrapper input:focus { border-color: var(--primary); }
+
+.unit-select {
+    width: auto;
+    padding: 8px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 14px;
+    color: var(--text-main);
+    outline: none;
+    cursor: pointer;
+}
+.unit-select:focus {
+    border-color: var(--primary);
+}
+
+.input-group label { display: block; font-size: 12px; color: #6B7280; margin-bottom: 4px; }
+.input-group > input { 
+    width: 100%; 
+    padding: 10px; 
+    border: 1px solid #D1D5DB; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    outline: none; 
+}
+.input-group > input:focus { border-color: var(--primary); }
+
+.unit-price { text-align: right; margin-top: 12px; font-size: 12px; color: #4B5563; }
+.unit-price span { font-size: 18px; font-weight: bold; color: var(--text-main); }
+
+.add-btn-wrapper { padding: 0 16px; margin-bottom: 20px; }
+.btn-add { 
+    width: 100%; 
+    background: #E0E7FF; 
+    color: var(--primary); 
+    border: 2px dashed var(--primary); 
+    padding: 14px; 
+    border-radius: 12px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+}
+
+.sticky-footer { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    max-width: 480px; 
+    margin: 0 auto; 
+    background: white; 
+    padding: 16px; 
+    box-shadow: 0 -4px 12px rgba(0,0,0,0.05); 
+    border-top-left-radius: 20px; 
+    border-top-right-radius: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    z-index: 10;
+}
+
+.verdict-box { 
+    background: var(--bg-color); 
+    padding: 12px; 
+    border-radius: 8px; 
+    text-align: center; 
+    font-weight: bold; 
+    font-size: 14px; 
+    transition: 0.3s;
+}
+.verdict-box.success { background: var(--success); color: white; }
+
+.btn-clear { 
+    background: #F3F4F6; 
+    border: none; 
+    padding: 14px; 
+    border-radius: 12px; 
+    font-weight: bold; 
+    color: #4B5563; 
+    font-size: 16px;
+    cursor: pointer;
+}
