@@ -37,7 +37,7 @@ function addItem() {
                 </div>
             </div>
             <div class="unit-price">
-                ตกหน่วยละ: <span id="unit-${id}">0</span> ฿
+                ตกหน่วยละ: <span id="unit-${id}">0</span> บาท
             </div>
         </div>
     `;
@@ -104,23 +104,21 @@ function calculate() {
     if (items.length > 1) {
         const winners = items.filter(i => i.unit === minPrice);
         
-        // สร้างข้อความสรุปราคาสินค้าทุกชิ้นที่นำมาเทียบ (เช่น ชิ้นที่ 1 = 10 ฿ | ชิ้นที่ 2 = 15 ฿)
-        let compareSummaryText = items.map(i => `ชิ้นที่ ${i.itemNumber} = ${Number(i.unit.toFixed(4))} ฿`).join(' | ');
+        // ---- ส่วนที่แก้ไข: เพิ่มคำว่า "บาท/หน่วย" ลงไปให้ชัดเจน ----
+        let compareSummaryText = items.map(i => `ชิ้นที่ ${i.itemNumber} = ${Number(i.unit.toFixed(4))} บาท/หน่วย`).join(' | ');
 
         // ไฮไลต์ผู้ชนะ
         winners.forEach(w => document.getElementById(`card-${w.id}`).classList.add('winner'));
         
         if (winners.length === items.length) {
-            // กรณีราคาเท่ากันหมด
             verdict.innerHTML = `
-                <div style="font-size: 12px; opacity: 0.9; margin-bottom: 4px; font-weight: normal;">${compareSummaryText}</div>
+                <div style="font-size: 13px; opacity: 0.9; margin-bottom: 6px; font-weight: normal; line-height: 1.4;">${compareSummaryText}</div>
                 <div>⚖️ ราคาเท่ากันทุกชิ้นครับ</div>
             `;
         } else {
-            // กรณีมีผู้ชนะ
             const winnerNumbers = winners.map(w => w.itemNumber).join(', ');
             verdict.innerHTML = `
-                <div style="font-size: 12px; opacity: 0.9; margin-bottom: 4px; font-weight: normal;">${compareSummaryText}</div>
+                <div style="font-size: 13px; opacity: 0.9; margin-bottom: 6px; font-weight: normal; line-height: 1.4;">${compareSummaryText}</div>
                 <div style="font-size: 16px;">✨ ชิ้นที่ ${winnerNumbers} คุ้มค่าสุด!</div>
             `;
             verdict.classList.add('success');

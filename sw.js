@@ -1,5 +1,5 @@
 // เปลี่ยนเลขเวอร์ชันตรงนี้ทุกครั้งที่มีการแก้โค้ด (เช่น v2, v3, v4)
-const CACHE_NAME = 'price-compare-v5'; 
+const CACHE_NAME = 'price-compare-v6'; 
 const urlsToCache = [
     './',
     './index.html',
