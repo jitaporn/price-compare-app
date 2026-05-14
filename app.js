@@ -75,26 +75,23 @@ function calculate() {
         
         let p = parseFloat(document.getElementById(`price-${id}`).value);
         let q = parseFloat(document.getElementById(`qty-${id}`).value);
-        let unitMultiplier = parseFloat(document.getElementById(`unitType-${id}`).value); // ตัวคูณหน่วย
+        let unitMultiplier = parseFloat(document.getElementById(`unitType-${id}`).value); 
         
         const unitEl = document.getElementById(`unit-${id}`);
 
-        // ดักจับข้อผิดพลาด (ถ้าว่างเปล่า, พิมพ์ตัวอักษรแปลกๆ, หรือติดลบ ให้ตีเป็น 0)
         if (isNaN(p) || p < 0) p = 0;
         if (isNaN(q) || q <= 0) q = 0;
 
         if (p > 0 && q > 0) {
-            // แปลงปริมาณตามหน่วยที่เลือก (เช่น 1.5 kg * 1000 = 1500 กรัม)
             let realQuantity = q * unitMultiplier;
             let unitPrice = p / realQuantity;
             
-            // ตัดทศนิยมส่วนเกินออก (ถ้าลงตัวให้เป็นจำนวนเต็ม ถ้าไม่ลงตัวโชว์สุดที่ 4 ตำแหน่ง)
             let displayPrice = Number(unitPrice.toFixed(4));
             unitEl.innerText = displayPrice;
             
             items.push({ id: id, unit: unitPrice, itemNumber: index + 1 });
             
-            if (unitPrice < minPrice) minPrice = unitPrice; // หาตัวที่ถูกที่สุด
+            if (unitPrice < minPrice) minPrice = unitPrice; 
         } else {
             unitEl.innerText = '0';
         }
@@ -107,16 +104,25 @@ function calculate() {
     if (items.length > 1) {
         const winners = items.filter(i => i.unit === minPrice);
         
+        // สร้างข้อความสรุปราคาสินค้าทุกชิ้นที่นำมาเทียบ (เช่น ชิ้นที่ 1 = 10 ฿ | ชิ้นที่ 2 = 15 ฿)
+        let compareSummaryText = items.map(i => `ชิ้นที่ ${i.itemNumber} = ${Number(i.unit.toFixed(4))} ฿`).join(' | ');
+
         // ไฮไลต์ผู้ชนะ
         winners.forEach(w => document.getElementById(`card-${w.id}`).classList.add('winner'));
         
         if (winners.length === items.length) {
-            verdict.innerText = '⚖️ ราคาเท่ากันทุกชิ้นครับ';
+            // กรณีราคาเท่ากันหมด
+            verdict.innerHTML = `
+                <div style="font-size: 12px; opacity: 0.9; margin-bottom: 4px; font-weight: normal;">${compareSummaryText}</div>
+                <div>⚖️ ราคาเท่ากันทุกชิ้นครับ</div>
+            `;
         } else {
+            // กรณีมีผู้ชนะ
             const winnerNumbers = winners.map(w => w.itemNumber).join(', ');
-            let displayMinPrice = Number(minPrice.toFixed(4)); // ตัดศูนย์ส่วนเกินในผลลัพธ์
-            
-            verdict.innerText = `✨ สินค้าชิ้นที่ ${winnerNumbers} คุ้มค่าสุด ราคา ${displayMinPrice} บาท/หน่วย`;
+            verdict.innerHTML = `
+                <div style="font-size: 12px; opacity: 0.9; margin-bottom: 4px; font-weight: normal;">${compareSummaryText}</div>
+                <div style="font-size: 16px;">✨ ชิ้นที่ ${winnerNumbers} คุ้มค่าสุด!</div>
+            `;
             verdict.classList.add('success');
         }
     } else {
@@ -130,7 +136,7 @@ function clearAll() {
     addItem();
     addItem();
     calculate();
-    window.scrollTo({ top: 0, behavior: 'smooth' }); // เลื่อนจอกลับไปบนสุด
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ลงทะเบียน Service Worker สำหรับ PWA
