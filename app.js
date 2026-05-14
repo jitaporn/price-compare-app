@@ -12,7 +12,7 @@ function addItem() {
     const id = Date.now() + '-' + itemCount; // สร้าง ID ไม่ซ้ำกัน
     const container = document.getElementById('cards-container');
     
-    // โครงสร้าง Card แบบใหม่ เพิ่มช่องเลือกหน่วย
+    // โครงสร้าง Card
     const cardHTML = `
         <div class="card" id="card-${id}">
             <div class="card-header">
@@ -37,7 +37,7 @@ function addItem() {
                 </div>
             </div>
             <div class="unit-price">
-                ตกหน่วยละ: <span id="unit-${id}">0</span> บาท
+                ตกหน่วยละ <span id="unit-${id}">0.00</span> บาท
             </div>
         </div>
     `;
@@ -86,14 +86,15 @@ function calculate() {
             let realQuantity = q * unitMultiplier;
             let unitPrice = p / realQuantity;
             
-            let displayPrice = Number(unitPrice.toFixed(4));
+            // ปรับทศนิยมเป็น 2 ตำแหน่ง
+            let displayPrice = unitPrice.toFixed(2);
             unitEl.innerText = displayPrice;
             
             items.push({ id: id, unit: unitPrice, itemNumber: index + 1 });
             
             if (unitPrice < minPrice) minPrice = unitPrice; 
         } else {
-            unitEl.innerText = '0';
+            unitEl.innerText = '0.00';
         }
     });
 
@@ -104,8 +105,8 @@ function calculate() {
     if (items.length > 1) {
         const winners = items.filter(i => i.unit === minPrice);
         
-        // ---- ส่วนที่แก้ไข: เพิ่มคำว่า "บาท/หน่วย" ลงไปให้ชัดเจน ----
-        let compareSummaryText = items.map(i => `ชิ้นที่ ${i.itemNumber} = ${Number(i.unit.toFixed(4))} บาท/หน่วย`).join(' | ');
+        // รูปแบบการรายงานผล (ชิ้นที่ 1 = 4.16 บาท/หน่วย   ชิ้นที่ 2 = 4.23 บาท/หน่วย)
+        let compareSummaryText = items.map(i => `ชิ้นที่ ${i.itemNumber} = ${i.unit.toFixed(2)} บาท/หน่วย`).join(' &nbsp;&nbsp;&nbsp; ');
 
         // ไฮไลต์ผู้ชนะ
         winners.forEach(w => document.getElementById(`card-${w.id}`).classList.add('winner'));
